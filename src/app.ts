@@ -1,0 +1,18 @@
+import express from "express";
+const port:number=3000
+const app = express();
+app.listen(port,()=>{
+    console.log(`Servidor corriendo en el puerto ${port}`);
+})
+
+app.use("/users/:id", (req, res)=>{
+    res.json({
+        id:1,
+        username:"maria",
+        email:"maria@gmail.com.ar",
+    })
+})
+app.use("/", (req, res)=>{
+    res.status(200).send("Hello World")
+})
+export {app}
