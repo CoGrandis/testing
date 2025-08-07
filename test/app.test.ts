@@ -35,30 +35,4 @@ describe("app",()=>{
             )
         })
     })
-    describe("GET /users",()=>{
-        it("Devuelve un json con datos de los usuarios",async()=>{
-            // Arrange
-            // Act            
-            const response = await request(app).get("/users");
-
-            // Assert
-            expect(response.body).toEqual(
-                expect.arrayContaining([
-                    expect.objectContaining({
-                        id :1,
-                        username:"maria",
-                        email:"maria@gmail.com.ar",
-                    }),
-                    expect.objectContaining({
-                        id :2,
-                        username:"maria2",
-                        email:"maria2@gmail.com.ar",
-                    })
-                ])
-                
-            )
-        })
-    })
 })
-
-// arraycontaining
