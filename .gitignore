@@ -7,3 +7,4 @@ build
 .env*
 !.env.template
 /generated/prisma
+/generated/prisma

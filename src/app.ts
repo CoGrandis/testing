@@ -1,35 +1,12 @@
 import express from "express";
-const port:number=3000
+import { ProductRouter } from "./productos/productRouter";
+import { InMemoryProductRepository } from "./productos/repository/InMemoryProductRepository";
+import { ProductService } from "./productos/services/productServices";
 const app = express();
-
-app.listen(port,()=>{
-    console.log(`Servidor corriendo en el puerto ${port}`);
-})
+const productRepository= new InMemoryProductRepository();
+const productService = new ProductService(productRepository);
+const productRouter = new ProductRouter(productService);
 app.use(express.json());
+app.use("/api/products", productRouter.init())
 
-app.get("/users", (req, res)=>{
-    res.json(
-    [{
-        id:1,
-        username:"maria",
-        email:"maria@gmail.com.ar",
-    },
-    {
-        id:2,
-        username:"maria2",
-        email:"maria2@gmail.com.ar",
-    }])
-})
-
-
-app.use("/users/:id", (req, res)=>{
-    res.json({
-        id:1,
-        username:"maria",
-        email:"maria@gmail.com.ar",
-    })
-})
-app.use("/", (req, res)=>{
-    res.status(200).send("Hello World")
-})
 export {app}
