@@ -1,6 +1,5 @@
 import express, { Router } from "express";
 import { ProductService } from "./services/productServices";
-import { IProductRepository } from "./repository/productRepository";
 import { Product } from "./model/productModel";
 
 abstract class AbstractRouter{

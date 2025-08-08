@@ -1,5 +1,4 @@
 import { Product } from "../model/productModel";
-import { PrismaProductRepository } from "../repository/prismaProductRepository";
 import { IProductRepository } from "../repository/productRepository";
 // separar la logica de la persistencia de datos
 export class ProductService{

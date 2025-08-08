@@ -19,40 +19,43 @@ describe("app",()=>{
         })
     })
 
-    describe("GET /users/:id",()=>{
-        it("Si el id existe devuelve un json con datos del usuario",async()=>{
+    describe("GET /api/products/:id",()=>{
+        it("Si el id existe devuelve un json con datos del producto",async()=>{
             // Arrange
             // Act            
-            const response = await request(app).get("/users/1");
+            const response = await request(app).get("/api/products/1");
 
             // Assert
             expect(response.body).toEqual(
                 expect.objectContaining({
-                    id :1,
-                    username:"maria",
-                    email:"maria@gmail.com.ar",
+                    id: 1,
+                    name: "producto",
+                    code: "ES43SS",
+                    price: 1000
                 })
             )
         })
     })
-    describe("GET /users",()=>{
-        it("Devuelve un json con datos de los usuarios",async()=>{
+    describe("GET /api/products",()=>{
+        it("Devuelve un json con datos de todos los productos",async()=>{
             // Arrange
             // Act            
-            const response = await request(app).get("/users");
+            const response = await request(app).get("/api/products");
 
             // Assert
             expect(response.body).toEqual(
                 expect.arrayContaining([
                     expect.objectContaining({
-                        id :1,
-                        username:"maria",
-                        email:"maria@gmail.com.ar",
+                        id: 1,
+                        name: "producto",
+                        code: "ES43SS",
+                        price: 1000
                     }),
                     expect.objectContaining({
-                        id :2,
-                        username:"maria2",
-                        email:"maria2@gmail.com.ar",
+                        id: 2,
+                        name: "tablet",
+                        code: "AA33ERS",
+                        price: 1000
                     })
                 ])
                 
