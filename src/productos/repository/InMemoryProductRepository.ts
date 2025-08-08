@@ -2,12 +2,11 @@ import { IProductRepository } from "./productRepository";
 import { Product } from "../model/productModel";
 
 export class InMemoryProductRepository implements IProductRepository {
-    private contador: number = 0;
+    private contador: number;
     private products: Product[];
     constructor(initialProduct?: Product[]) {
         this.products = initialProduct ?? [];
-        this.contador = initialProduct?.reduce((lastId, product) =>
-            (product.id > lastId ? product.id : lastId), 0) ?? 0;
+        this.contador = initialProduct?.reduce((lastId, product) => (product.id > lastId ? product.id ?? 0 : lastId), 0) ?? 0;
     }
     async getAll(): Promise<Product[]> {
         return Promise.resolve(this.products)

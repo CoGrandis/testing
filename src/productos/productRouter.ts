@@ -30,6 +30,7 @@ export class ProductRouter extends AbstractRouter{
             try {
                 const id:number= parseInt(req.params.id)
                 const result =  await this.productService.getProductById(id)
+                console.log(result)
                 res.json(result)
                 
             } catch (error) {
@@ -40,6 +41,7 @@ export class ProductRouter extends AbstractRouter{
             try {
             const {name, code, price} = req.body
             const producto:Product={
+        
                 code:code,
                 name:name,
                 price:price
