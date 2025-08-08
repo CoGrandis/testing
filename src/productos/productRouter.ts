@@ -12,21 +12,32 @@ abstract class AbstractRouter{
         return this.router
     }
 }
+
 export class ProductRouter extends AbstractRouter{
     constructor(
         private readonly productService:ProductService
     ){ 
         super()
         this.router.get("/", async (req, res)=>{
-           const result =  await this.productService.getAll()
-           res.json(result)
+            try {
+               const result =  await this.productService.getAll()
+               res.json(result)        
+            } catch (error) {
+                console.log(error)
+            }
         })
         this.router.get("/:id", async (req, res)=>{
-            const id:number= parseInt(req.params.id)
-            const result =  await this.productService.getProductById(id)
-            res.json(result)
+            try {
+                const id:number= parseInt(req.params.id)
+                const result =  await this.productService.getProductById(id)
+                res.json(result)
+                
+            } catch (error) {
+                console.log(error)                
+            }
         })
         this.router.post("/", async(req, res) => {
+            try {
             const {name, code, price} = req.body
             const producto:Product={
                 code:code,
@@ -34,6 +45,21 @@ export class ProductRouter extends AbstractRouter{
                 price:price
             }
             const result = await this.productService.createProduct(producto)
+            res.json(result)
+                
+            } catch (error) {
+                console.log(error)
+            }
+        })
+        this.router.put("/:id", async(req,res)=>{
+            const id:number= parseInt(req.params.id)
+            const {name, code, price} = req.body
+            const producto:Product={
+                code:code,
+                name:name,
+                price:price
+            }
+            const result = await this.productService.updateProduct(producto, id)
             res.json(result)
         })
     }

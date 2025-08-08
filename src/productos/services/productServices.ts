@@ -16,4 +16,9 @@ export class ProductService{
         const result = await this.productRepository.createProduct(product)
         return result
     }
+
+    async updateProduct(product:Product, id:number){
+        const result = await this.productRepository.updateProduct(product, id)
+        return result
+    }
 }

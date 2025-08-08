@@ -19,4 +19,12 @@ export class PrismaProductRepository implements IProductRepository{
         }})
         return result
     }
+    async updateProduct(product: Product, id:number): Promise<Product | null> {
+        const result = await prisma.producto.update({where:{id},data:{
+            code:product.code,
+            name:product.name,
+            price:product.price,
+        }})
+        return result
+    }
 }
