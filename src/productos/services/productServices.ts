@@ -1,4 +1,4 @@
-import { Product } from "../model/productModel";
+import { NewProduct, Product } from "../model/productModel";
 import { IProductRepository } from "../repository/productRepository";
 // separar la logica de la persistencia de datos
 export class ProductService{
@@ -12,12 +12,12 @@ export class ProductService{
         return result
     }
 
-    async createProduct(product:Product){
+    async createProduct(product:NewProduct){
         const result = await this.productRepository.createProduct(product)
         return result
     }
 
-    async updateProduct(product:Product, id:number){
+    async updateProduct(product:NewProduct, id:number){
         const result = await this.productRepository.updateProduct(product, id)
         return result
     }

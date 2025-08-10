@@ -1,6 +1,6 @@
 import express, { Router } from "express";
 import { ProductService } from "./services/productServices";
-import { Product } from "./model/productModel";
+import { NewProduct, Product } from "./model/productModel";
 
 abstract class AbstractRouter{
     protected router:Router;
@@ -40,8 +40,7 @@ export class ProductRouter extends AbstractRouter{
         this.router.post("/", async(req, res) => {
             try {
             const {name, code, price} = req.body
-            const producto:Product={
-        
+            const producto:NewProduct={
                 code:code,
                 name:name,
                 price:price
@@ -56,7 +55,7 @@ export class ProductRouter extends AbstractRouter{
         this.router.put("/:id", async(req,res)=>{
             const id:number= parseInt(req.params.id)
             const {name, code, price} = req.body
-            const producto:Product={
+            const producto:NewProduct={
                 code:code,
                 name:name,
                 price:price

@@ -4,6 +4,7 @@ import { buildApp } from "src/app";
 import { InMemoryProductRepository } from "src/productos/repository/InMemoryProductRepository";
 import { container } from "src/dContainer/container";
 import { Product } from "src/productos/model/productModel";
+import { ProductService } from "src/productos/services/productServices";
 
 describe("app",()=>{
     describe("GET /api/products/:id",()=>{
@@ -15,8 +16,9 @@ describe("app",()=>{
                 code: "ES43SS",
                 price: 1000
             }
-            const productRepository = new InMemoryProductRepository([newProduct])
-            container.registerInstance("product-repository", productRepository)
+            const productRepository = new InMemoryProductRepository([newProduct]);
+            container.registerInstance("product-repository", productRepository);
+            container.register("product-service", ProductService, ["product-repository"]);
             
             const app= buildApp()
 

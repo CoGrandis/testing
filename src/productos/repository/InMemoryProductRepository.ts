@@ -1,5 +1,5 @@
 import { IProductRepository } from "./productRepository";
-import { Product } from "../model/productModel";
+import { NewProduct, Product } from "../model/productModel";
 
 export class InMemoryProductRepository implements IProductRepository {
     private contador: number;
@@ -12,13 +12,14 @@ export class InMemoryProductRepository implements IProductRepository {
         return Promise.resolve(this.products)
     }
 
-    async getProductById(id: Number): Promise<Product | null> {
+    async getProductById(id: number): Promise<Product | null> {
         return Promise.resolve(this.products.find(product => product.id === id) || null);
     }
 
-    async createProduct(product: Product): Promise<Product | null> {
+    async createProduct(product: NewProduct): Promise<Product | null> {
+        this.contador++;
         const newProduct: Product = {
-            id: this.contador + 1,
+            id: this.contador,
             code: product.code,
             name: product.name,
             price: product.price,
@@ -27,7 +28,7 @@ export class InMemoryProductRepository implements IProductRepository {
         this.products.push(newProduct)
         return Promise.resolve(newProduct)
     }
-    async updateProduct(product: Product, id: number): Promise<Product | null> {
+    async updateProduct(product: NewProduct, id: number): Promise<Product | null> {
         return this.products.find(product => product.id === id) || null;
 
 
