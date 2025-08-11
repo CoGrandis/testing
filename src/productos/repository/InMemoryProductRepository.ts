@@ -29,7 +29,8 @@ export class InMemoryProductRepository implements IProductRepository {
         return Promise.resolve(newProduct)
     }
     async updateProduct(product: NewProduct, id: number): Promise<Product | null> {
-        return this.products.find(product => product.id === id) || null;
+        const index = this.products.findIndex(products => products.id === id);
+        return this.products[index] = product || null;
 
 
     }
